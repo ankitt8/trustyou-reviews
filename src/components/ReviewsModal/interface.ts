@@ -9,3 +9,9 @@ export interface DataToRender {
 	filterValue: string;
 	reviews: ReviewToDisplay[];
 }
+
+export interface ReviewsModalProps {
+	closeModal: () => void;
+	filterType: string;
+	filterValues: string[]
+}

@@ -9,7 +9,8 @@ export const QuestionAnswerReviewsTable = () => {
 	const [selectedFilterType, setSelectedFilterType] = useState<string>('');
 	const [selectedFilterValues, setSelectedFilterValues] = useState<string[]>([]);
 	const createTableRows = (reviewsTypeAmount: ReviewsTypeAmount[]) => (
-		reviewsTypeAmount.map(({type, amount,filterValues}) => (<tr>
+		reviewsTypeAmount.map(({type, amount,filterValues}) => (
+		<tr key={type}>
 			<td>{type}</td>
 			<td onClick={() => handleAnswerClick(type, filterValues)}>{amount}</td>
 		</tr>))
@@ -50,7 +51,7 @@ export const QuestionAnswerReviewsTable = () => {
 				}
 				</tbody>
 			</table>
-			{isModalOpen && <ReviewsModal filterType={selectedFilterType} filterValues={selectedFilterValues} />}
+			{isModalOpen && <ReviewsModal closeModal={() => setIsModalOpen(false)} filterType={selectedFilterType} filterValues={selectedFilterValues} />}
 		</div>
 	)
 }
