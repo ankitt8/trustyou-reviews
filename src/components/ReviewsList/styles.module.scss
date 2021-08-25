@@ -1,0 +1,17 @@
+.reviewsListWrapper {
+  max-height: 80vh;
+  max-width: 80vw;
+  overflow: scroll;
+}
+span {
+  color: deepskyblue;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 5px;
+  }
+}

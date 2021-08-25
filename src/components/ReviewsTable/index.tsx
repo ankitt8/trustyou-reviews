@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {ReviewsTableProps, ReviewsTypeAmount} from "./interface";
 import {ReviewsModal} from "components/ReviewsModal";
-
+import {formatString} from "utility";
+import styles from "./styles.module.scss";
 export const ReviewsTable = ({
 	data,
 	error
@@ -13,8 +14,10 @@ export const ReviewsTable = ({
 		const reviewsTypeAmount: ReviewsTypeAmount[] = createReviewsTypeAmount(data);
 		return reviewsTypeAmount.map(({type, amount, filterValues}) => (
 			<tr key={type}>
-				<td>{type}</td>
-				<td onClick={() => handleAnswerClick(type, filterValues)}>{amount}</td>
+				<td>{formatString(type)}</td>
+				<td>
+					{amount}
+					<span className={styles.eye} onClick={() => handleAnswerClick(type, filterValues)}>    &#128065;</span></td>
 			</tr>));
 	}
 	const handleAnswerClick = (filterType: string, filterValues: string[]) => {
@@ -23,7 +26,7 @@ export const ReviewsTable = ({
 		setSelectedFilterValues(filterValues);
 	}
 	return (
-		<div className='wrapper'>
+		<div className={styles.reviewsTableWrapper}>
 			<table>
 				<thead>
 					<tr>
@@ -35,14 +38,20 @@ export const ReviewsTable = ({
 				{
 					error ? <td>Failed to load data</td> :
 
-							data ? createTableRows(data) : <tr>
-								<td>Loading...</td>
+							data ? createTableRows(data) :
+								<tr>
+									<td>Loading...</td>
+									<td>Loading...</td>
 								</tr>
 
 				}
 				</tbody>
 			</table>
-			{isModalOpen && <ReviewsModal closeModal={() => setIsModalOpen(false)} filterType={selectedFilterType} filterValues={selectedFilterValues} />}
+			{isModalOpen && <ReviewsModal
+				closeModal={() => setIsModalOpen(false)}
+				filterType={selectedFilterType}
+				filterValues={selectedFilterValues}
+			/>}
 		</div>
 	)
 }

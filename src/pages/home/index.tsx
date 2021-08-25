@@ -3,6 +3,7 @@ import {ReviewsPieChartContainer} from "container/ReviewsPieChart";
 import { ReviewsTable} from "components/ReviewsTable";
 import {GET_REVIEW_DISTRIBUTION} from "constants/urls";
 import {StateHomePageData} from "./interface";
+import styles from "./styles.module.scss";
 export const HomePage = () => {
 	const [homePageState, setHomePageState] = useState<StateHomePageData>({
 		loaded: false,
@@ -32,10 +33,9 @@ export const HomePage = () => {
 		}
 	}, [getReviewDistribution]);
 	return (
-		<>
+		<div className={styles.homePage}>
 			<ReviewsTable data={homePageState.data} error={homePageState.error} />
 			<ReviewsPieChartContainer data={homePageState.data} error={homePageState.error}/>
-		</>
-
+		</div>
 	)
 }

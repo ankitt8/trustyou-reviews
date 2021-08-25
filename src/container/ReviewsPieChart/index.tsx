@@ -2,6 +2,8 @@ import React from "react";
 import {ReviewsPieChart} from "components/ReviewsPieChart";
 import {Loader} from "components/Loader";
 import {PieChartWrapperData, ReviewsPieChartContainerProps} from "./interface";
+import styles from "./styles.module.scss";
+import {formatString} from "../../utility";
 export const ReviewsPieChartContainer = ({
 	data,
 	error
@@ -15,10 +17,7 @@ export const ReviewsPieChartContainer = ({
 			return <Loader />
 		}
 	}
-	return <div>
-		{render()}
-	</div>
-
+	return render();
 }
 function createPieChartWrapperData(data: Record<string, Record<string, number>>): PieChartWrapperData {
 	const result: PieChartWrapperData = {};
@@ -35,11 +34,11 @@ function createPieChartWrapperData(data: Record<string, Record<string, number>>)
 }
 
 const ReviewsPieChartWrapper = ({reviewsPieChartWrapperData}: {reviewsPieChartWrapperData:PieChartWrapperData})  => {
-	return <div style={{display: 'flex', width: '80vw', flexWrap: 'wrap'}}>
+	return <div className={styles.reviewsChartWrapper}>
 		{
 			Object.values(reviewsPieChartWrapperData)
 			.map(({data, title}) =>
-				<ReviewsPieChart key={title} data={data} title={title}/>)
+				<ReviewsPieChart key={title} data={data} title={formatString(title)}/>)
 		}
 	</div>
 }

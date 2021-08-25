@@ -12,7 +12,8 @@ const customStyles = {
 		bottom: 'auto',
 		marginRight: '-50%',
 		transform: 'translate(-50%, -50%)',
-		width: '80vh',
+		maxWidth: '95vw',
+		maxHeight: '90vh'
 	},
 };
 export const ReviewsModal = ({
@@ -49,18 +50,18 @@ export const ReviewsModal = ({
 
 	// @ts-ignore
 	return (
-		<Modal
-			isOpen={true}
-			onRequestClose={closeModal}
-			style={customStyles}
-			contentLabel="Example Modal"
-		>
-			{
-				isLoaded ?
-					ReviewsList(dataToRender)
-				 : <Loader />
-			}
-		</Modal>
+			<Modal
+				isOpen={true}
+				onRequestClose={closeModal}
+				style={customStyles}
+				contentLabel="Example Modal"
+			>
+				{
+					isLoaded ?
+						ReviewsList(dataToRender)
+						: <Loader />
+				}
+			</Modal>
 	);
 }
 
